@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 const hbs = require('express-handlebars');
-app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
+app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './views/layouts', defaultLayout: 'main' }));
 
 app.use((req, res, next) => {
   res.show = (name) => {
@@ -14,8 +14,10 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, '/public')));
 
+app.set('view engine', 'hbs');
+
 app.get('/', (req, res) => {
-  res.render('index.html');
+  res.render('index');
 });
 
 app.get('/about', (req, res) => {
